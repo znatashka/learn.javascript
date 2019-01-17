@@ -1,0 +1,87 @@
+html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.game {
+    position: relative;
+}
+
+.win__label,
+.loss__label,
+.draw__label {
+    display: none;
+    position: absolute;
+    top: 30%;
+    left: calc(50% - 5em);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    padding: 3px;
+    width: 10em;
+    transform: rotate(-15deg);
+}
+
+.win__label {
+    background-color: green;
+}
+
+.loss__label {
+    background-color: red;
+}
+
+.draw__label {
+    background-color: orange;
+}
+
+table {
+    border-spacing: 0;
+    margin-top: 5em;
+}
+
+table.win ~ .win__label,
+table.loss ~ .loss__label,
+table.draw ~ .draw__label {
+    display: block;
+}
+
+td {
+    width: 5em;
+    height: 5em;
+    cursor: pointer;
+}
+
+td:not(:first-child) {
+    border-left: 1px solid;
+}
+
+tr:not(:last-child) td {
+    border-bottom: 1px solid;
+}
+
+.game__settings {
+    margin-top: 4em;
+}
+
+.btn {
+    font-family: inherit;
+    background-color: greenyellow;
+    border: 1px solid green;
+    margin-top: 5em;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.btn:hover {
+    box-shadow: 0 0 15px -3px;
+}
+
+.wrong {
+    border: 1px solid red;
+}

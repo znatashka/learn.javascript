@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>throttle</title>
+</head>
+<body>
+<script>
+    function throttle(f, delay) {
+        let isThrottled = false;
+        let savedArgs;
+        let savedThis;
+
+        function wrapper() {
+
+            if (isThrottled) {
+                savedArgs = arguments;
+                savedThis = this;
+                return;
+            }
+
+            f.apply(this, arguments);
+
+            isThrottled = true;
+
+            setTimeout(function () {
+                isThrottled = false;
+                if (savedArgs) {
+                    wrapper.apply(savedThis, savedArgs);
+                    savedArgs = savedThis = null;
+                }
+            }, delay);
+        }
+
+        return wrapper;
+    }
+
+    document.addEventListener('mousemove', throttle(onMove, 1000));
+
+    function onMove(event) {
+        console.log(`x:${event.clientX} y:${event.clientY}`)
+    }
+</script>
+</body>
+</html>

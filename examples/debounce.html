@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>debounce</title>
+</head>
+<body>
+<label>
+    <input id="input1">
+</label>
+
+<script>
+    function debounce(f, delay) {
+        let timer = null;
+
+        return function () {
+            if (timer) {
+                clearTimeout(timer);
+            }
+
+            timer = setTimeout(() => {
+                f.apply(this, arguments);
+                timer = null;
+            }, delay);
+        };
+    }
+
+    let wrapper = debounce(onChange, 1000);
+
+    document.querySelector('#input1')
+        .addEventListener('input', wrapper);
+
+    function onChange(event) {
+        console.log(event.target.value)
+    }
+</script>
+</body>
+</html>
