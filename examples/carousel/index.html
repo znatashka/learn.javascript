@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="carousel">
+    <button class="arrow">⇦</button>
+    <button class="arrow">⇨</button>
+    <div class="inner">
+        <ul>
+            <li><img src="https://js.cx/carousel/1.png"></li>
+            <li><img src="https://js.cx/carousel/2.png"></li>
+            <li><img src="https://js.cx/carousel/3.png"></li>
+            <li><img src="https://js.cx/carousel/4.png"></li>
+            <li><img src="https://js.cx/carousel/5.png"></li>
+            <li><img src="https://js.cx/carousel/6.png"></li>
+            <li><img src="https://js.cx/carousel/7.png"></li>
+            <li><img src="https://js.cx/carousel/8.png"></li>
+            <li><img src="https://js.cx/carousel/9.png"></li>
+            <li><img src="https://js.cx/carousel/10.png"></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const left = document.querySelector('.arrow:first-child');
+    const right = document.querySelector('.arrow:nth-child(2)');
+    const list = document.querySelector('ul');
+    const listOfLi = document.querySelectorAll('li');
+    const countOfLi = listOfLi.length;
+    const widthOfLi = listOfLi[0].clientWidth;
+    const count = 3;
+    let margin = 0;
+
+    left.onclick = () => {
+        margin = Math.min(margin + widthOfLi * count, 0);
+        list.style.marginLeft = margin + 'px';
+    };
+
+    right.onclick = () => {
+        margin = Math.max(margin - widthOfLi * count, -widthOfLi * (countOfLi - count));
+        list.style.marginLeft = margin + 'px';
+    };
+</script>
+</body>
+</html>

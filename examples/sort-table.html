@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        th {
+            cursor: pointer;
+        }
+
+        th:hover {
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<table id="grid">
+    <thead>
+    <tr>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>5</td>
+        <td>Вася</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Петя</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>Женя</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Маша</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Илья</td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    'use strict';
+
+    let table = document.querySelector('#grid');
+
+    table.onclick = (event) => {
+        if (event.target.tagName === 'TH') {
+            sortColumn(event.target.cellIndex, event.target.dataset.type)
+        }
+    };
+
+    function sortColumn(colNum, type) {
+        let rows = [...table.querySelectorAll('tbody tr')];
+        let sortFunction;
+        switch (type) {
+            case 'number':
+                sortFunction = (a, b) => {
+                    return +a.cells[colNum].textContent - (+b.cells[colNum].textContent);
+                };
+                break;
+            case 'string':
+                sortFunction = (a, b) => {
+                    return a.cells[colNum].textContent.localeCompare(b.cells[colNum].textContent);
+                };
+                break;
+        }
+        rows.sort(sortFunction);
+        replaceTableBody(rows);
+    }
+
+    function replaceTableBody(rows) {
+        let body = table.querySelector('tbody');
+        body.innerHTML = '';
+        rows.forEach(row => body.appendChild(row))
+    }
+</script>
+</body>
+</html>

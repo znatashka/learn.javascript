@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>DOM</h2>
+<div id="container1"></div>
+
+<h2>InnerHTML</h2>
+<div id="container2"></div>
+
+<script>
+    'use strict';
+
+    const data = {
+        'Рыбы': {
+            'Форель': {},
+            'Щука': {}
+        },
+
+        'Деревья': {
+            'Хвойные': {
+                'Лиственница': {},
+                'Ель': {}
+            },
+            'Цветковые': {
+                'Берёза': {},
+                'Тополь': {}
+            }
+        }
+    };
+
+    const container1 = document.getElementById('container1');
+    createTree(container1, data);
+
+    const container2 = document.getElementById('container2');
+    container2.innerHTML = createTreeHTML(data);
+
+    function createTree(container, data) {
+        const ul = document.createElement('ul');
+        for (const field in data) {
+            if (data.hasOwnProperty(field)) {
+                const li = document.createElement('li');
+                li.innerText = field;
+                if (isNotEmpty(data[field])) {
+                    createTree(li, data[field]);
+                }
+                ul.appendChild(li);
+            }
+        }
+        container.appendChild(ul);
+    }
+
+    function createTreeHTML(data) {
+        let html = '<ul>';
+        for (const field in data) {
+            if (data.hasOwnProperty(field)) {
+                html += `<li>${field}`;
+                if (isNotEmpty(data[field])) {
+                    html += createTreeHTML(data[field]);
+                }
+                html += '</li>';
+            }
+        }
+        html += '</ul>';
+        return html;
+    }
+
+    function isNotEmpty(data) {
+        for (const field in data) {
+            return true;
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

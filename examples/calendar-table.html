@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            padding: 3px;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+            background-color: #E6E6E6;
+        }
+    </style>
+    <meta charset="utf-8">
+</head>
+
+<body>
+<div id="calendar"></div>
+
+<script>
+    function createCalendar(id, year, month) {
+        const elem = document.getElementById(id);
+        let html = `<table>
+                        <tr>
+                            <th>пн</th>
+                            <th>вт</th>
+                            <th>ср</th>
+                            <th>чт</th>
+                            <th>пт</th>
+                            <th>сб</th>
+                            <th>вс</th>
+                        </tr>`;
+        let array = [];
+
+        month = month - 1;
+        let lastDayOfMonth = getLastDayOfMonth(year, month);
+
+        let week = 0;
+        array[week] = new Array(7);
+        for (let i = 0; i < lastDayOfMonth; i++) {
+            let day = i + 1;
+            let date = new Date(year, month, day);
+            let dayOfWeek = (date.getDay() === 0 ? 7 : date.getDay()) - 1;
+            array[week][dayOfWeek] = day;
+
+            if (dayOfWeek === 6 && day !== lastDayOfMonth) {
+                array[++week] = new Array(7);
+            }
+        }
+
+        for (let week = 0; week < array.length; week++) {
+            html += '<tr>';
+            for (let day = 0; day < array[week].length; day++) {
+                html += `<td>${array[week][day] || ''}</td>`;
+            }
+            html += '</tr>';
+        }
+        html += '</table>';
+
+        elem.innerHTML = html;
+    }
+
+    function getLastDayOfMonth(year, month) {
+        const date = new Date(year, month + 1, 0);
+        return date.getDate();
+    }
+
+    createCalendar('calendar', 2012, 9)
+</script>
+</body>
+</html>

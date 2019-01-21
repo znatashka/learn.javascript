@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #field {
+            width: 200px;
+            border: 10px groove black;
+            background-color: #00FF00;
+            position: relative;
+        }
+
+        #ball {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div id="field">
+    <img src="https://js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . .
+</div>
+
+<script>
+    const ball = document.getElementById('ball');
+    const field = document.getElementById('field');
+    let fieldStyle = getComputedStyle(field, null);
+    let ballStyle = getComputedStyle(ball, null);
+
+    ball.style.bottom = calcPosition(fieldStyle.height, ballStyle.height);
+    ball.style.right = calcPosition(fieldStyle.width, ballStyle.width);
+
+    function calcPosition(fieldStyle, ballStyle) {
+        return (parseInt(fieldStyle) / 2) - (parseInt(ballStyle) / 2) + 'px';
+    }
+</script>
+</body>
+</html>
