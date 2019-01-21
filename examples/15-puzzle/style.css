@@ -1,0 +1,28 @@
+html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.puzzle {
+    border: 1px solid black;
+}
+
+.puzzle__item {
+    cursor: pointer;
+    width: 3em;
+    height: 3em;
+    border: 1px dashed black;
+}
+
+.puzzle__item::before {
+    content: attr(data-number);
+}
+
+.puzzle__item:not([data-number]) {
+    background-color: lightgrey;
+    cursor: default;
+}
