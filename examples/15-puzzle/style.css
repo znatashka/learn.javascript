@@ -9,6 +9,7 @@ html {
 
 .puzzle {
     border: 1px solid black;
+    position: relative;
 }
 
 .puzzle__item {
@@ -25,4 +26,38 @@ html {
 .puzzle__item:not([data-number]) {
     background-color: lightgrey;
     cursor: default;
+}
+
+.puzzle::before {
+    content: 'you win';
+    display: none;
+    position: absolute;
+    top: 45%;
+    left: calc(50% - 5em);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    padding: 3px;
+    width: 10em;
+    transform: rotate(-15deg);
+    background-color: green;
+}
+
+.puzzle.game_over::before {
+    display: block;
+}
+
+.btn__new-game {
+    font-family: inherit;
+    background-color: greenyellow;
+    border: 1px solid green;
+    margin-top: 2em;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.btn__new-game:hover {
+    box-shadow: 0 0 15px -3px;
 }
