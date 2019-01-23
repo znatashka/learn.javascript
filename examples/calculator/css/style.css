@@ -17,6 +17,20 @@ html {
     font-family: inherit;
 }
 
+.calc__input-field + span {
+    position: relative;
+}
+
+.calc__input-field + span::before {
+    content: 'x';
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: -11em;
+    cursor: pointer;
+    color: gray;
+}
+
 .calc__input-field:focus {
     outline: none;
 }
