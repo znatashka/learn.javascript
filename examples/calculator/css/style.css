@@ -21,6 +21,14 @@ html {
     position: relative;
 }
 
+.calc__input-field + span:hover::before {
+    text-shadow: 0 0 5px;
+}
+
+.calc__input-field + span:active::before {
+    opacity: .5;
+}
+
 .calc__input-field + span::before {
     content: 'x';
     z-index: 1;
@@ -52,11 +60,12 @@ html {
 .calc__numeric-buttons {
     width: 10em;
 }
+
 .calc__function-buttons {
     width: 5em;
 }
 
-.calc__btn {
+.btn {
     width: 1.5em;
     height: 1.5em;
     margin: .5em;
@@ -67,11 +76,19 @@ html {
     border-radius: 50%;
 }
 
-.calc__btn:hover {
+.btn::before {
+    content: attr(data-label);
+}
+
+.btn:hover {
     box-shadow: 0 0 10px -3px;
 }
 
-.btn__equals {
+.btn:active {
+    opacity: .5;
+}
+
+.calc__equals-btn {
     font-size: 1.5em;
     background-color: greenyellow;
     border-color: green;

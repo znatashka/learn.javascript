@@ -1,3 +1,6 @@
-new Calculator(
-    document.querySelector('.calculator')
-);
+(() => {
+
+    const element = document.querySelector('.calculator');
+
+    new Calculator(element);
+})();
