@@ -7,7 +7,7 @@ export default class MemoryButtons extends BaseComponent {
         this._render();
 
         this._element.addEventListener('click', (event) => {
-            if (event.target.closest('.calc__memory-btn[data-label]')) {
+            if (event.target.closest('[data-label]')) {
                 if (event.target.dataset.label === 'M+') {
                     this._write();
                 } else if (event.target.dataset.label === 'M-') {
