@@ -8,7 +8,7 @@ export default class Calculator {
         this._element = element;
         this._render();
 
-        this._textField = this._element.querySelector('.calc__input-field');
+        this._textField = this._element.querySelector('[data-element="text-field"]');
 
         new NumericButtons({
             element: this._element.querySelector('[data-component="numeric-buttons"]'),
@@ -35,7 +35,7 @@ export default class Calculator {
         });
 
         this._element.addEventListener('click', (event) => {
-            if (event.target.closest('.calc__clear-btn')) {
+            if (event.target.closest('[data-element="clear-button"]')) {
                 this._writeValue('');
             }
         });
@@ -52,9 +52,9 @@ export default class Calculator {
     _render() {
         this._element.innerHTML = `
             <div class="calc">
-                <input class="calc__input-field" type="text" placeholder="0" readonly>
+                <input class="calc__input-field" data-element="text-field" type="text" placeholder="0" readonly>
                 
-                <span class="calc__clear-btn"></span>
+                <span class="calc__clear-btn" data-element="clear-button"></span>
                 
                 <div data-component="equal-button"></div> 
                 
