@@ -6,10 +6,10 @@ export default class EqualsButton extends ComponentWithOperations {
         this._render();
 
         this.onClick('[data-component="equal-button"]',
-            () => this.emit('calculate', this.reversePolishNotation.bind(this)))
+            () => this.emit('calculate', this._reversePolishNotation.bind(this)))
     }
 
-    reversePolishNotation(expression) {
+    _reversePolishNotation(expression) {
         const stack = [];
         const output = [];
         const result = [];

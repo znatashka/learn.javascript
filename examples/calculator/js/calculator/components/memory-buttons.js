@@ -8,14 +8,14 @@ export default class MemoryButtons extends BaseComponent {
 
         this.onClick('[data-label]', (event) => {
             if (event.target.dataset.label === 'M+') {
-                this.emit('save-to-memory', this.memorize.bind(this))
+                this.emit('save-to-memory', this._memorize.bind(this))
             } else if (event.target.dataset.label === 'M-') {
                 this.emit('read-from-memory', this._data.pop())
             }
         })
     }
 
-    memorize(value) {
+    _memorize(value) {
         this._data.push(value)
     }
 
