@@ -1,0 +1,94 @@
+html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.calc__input-field {
+    width: 11em;
+    margin: 1em;
+    padding: .5em;
+    text-align: right;
+    border: none;
+    border-bottom: 1px solid black;
+    font-family: inherit;
+}
+
+.calc__input-field + span {
+    position: relative;
+}
+
+.calc__input-field + span:hover::before {
+    text-shadow: 0 0 5px;
+}
+
+.calc__input-field + span:active::before {
+    opacity: .5;
+}
+
+.calc__input-field + span::before {
+    content: 'x';
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: -11em;
+    cursor: pointer;
+    color: gray;
+}
+
+.calc__input-field:focus {
+    outline: none;
+}
+
+.buttons {
+    width: 16em;
+    display: flex;
+}
+
+.calc__btn {
+    width: 1.5em;
+    height: 1.5em;
+    margin: .5em;
+    padding: .1em;
+    cursor: pointer;
+    display: inline-block;
+    border: 1px dotted black;
+    border-radius: 50%;
+}
+
+.calc__btn::before {
+    content: attr(data-label);
+}
+
+.calc__btn:hover {
+    box-shadow: 0 0 10px -3px;
+}
+
+.calc__btn:active {
+    opacity: .5;
+}
+
+[data-component="numeric-buttons"] .calc__btn:hover {
+    background-color: lightcyan;
+}
+
+[data-component="function-buttons"] .calc__btn:hover {
+    background-color: lightyellow;
+}
+
+[data-component="memory-buttons"] .calc__btn:hover {
+    background-color: lavenderblush;
+}
+
+[data-component="equal-button"] {
+    display: inline-block;
+}
+
+[data-component="equal-button"] .calc__equals-btn {
+    font-size: 1.5em;
+    background-color: greenyellow;
+    border-color: green;
+}
