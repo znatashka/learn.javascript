@@ -1,44 +1,28 @@
-import BaseComponent from './base-component.js';
+import ComponentWithOperations from "./component-with-operations.js";
 
-export default class EqualsButton extends BaseComponent {
+export default class EqualsButton extends ComponentWithOperations {
     constructor(options) {
         super(options);
         this._render();
 
-        this._element.addEventListener('click', (event) => {
-            if (event.target.closest('.calc__equals-btn')) {
-                this._calculate();
-            }
-        });
+        this.onClick('[data-component="equal-button"]',
+            () => this.emit('calculate', this._reversePolishNotation.bind(this)))
     }
 
-    _calculate() {
-        const expression = [...this._onReadValue()]
-            .map(s => this._operationsKeys.includes(s) ? ` ${s} ` : s)
-            .join('')
-            .split(' ');
-
-        this._onWriteValue(
-            this._rpn(expression)
-        );
-    }
-
-    _rpn(expression) {
+    _reversePolishNotation(expression) {
         const stack = [];
         const output = [];
         const result = [];
 
         expression.forEach(part => {
-            if (this._operationsKeys.includes(part)) {
-                if (stack.length === 0) {
-                    stack.push(part);
-                } else {
+            if (this._operations.hasOwnProperty(part)) {
+                if (stack.length > 0) {
                     const last = stack[stack.length - 1];
                     if (this._operations[last].priority < this._operations[part].priority) {
                         output.push(stack.pop());
                     }
-                    stack.push(part);
                 }
+                stack.push(part);
             } else {
                 output.push(part);
             }
@@ -49,7 +33,7 @@ export default class EqualsButton extends BaseComponent {
         }
 
         output.forEach(part => {
-            if (this._operationsKeys.includes(part)) {
+            if (this._operations.hasOwnProperty(part)) {
                 const b = +result.pop();
                 const a = +result.pop();
                 result.push(
