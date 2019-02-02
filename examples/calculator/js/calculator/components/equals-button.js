@@ -5,25 +5,11 @@ export default class EqualsButton extends ComponentWithOperations {
         super(options);
         this._render();
 
-        this._element.addEventListener('click', (event) => {
-            if (event.target.closest('[data-component="equal-button"]')) {
-                this._calculate();
-            }
-        });
+        this.onClick('[data-component="equal-button"]',
+            () => this.emit('calculate', this.reversePolishNotation.bind(this)))
     }
 
-    _calculate() {
-        const expression = [...this._onReadValue()]
-            .map(s => this._operations.hasOwnProperty(String(s)) ? ` ${s} ` : s)
-            .join('')
-            .split(' ');
-
-        this._onWriteValue(
-            this._reversePolishNotation(expression)
-        );
-    }
-
-    _reversePolishNotation(expression) {
+    reversePolishNotation(expression) {
         const stack = [];
         const output = [];
         const result = [];
