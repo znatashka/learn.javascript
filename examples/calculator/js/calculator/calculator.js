@@ -16,7 +16,7 @@ export default class Calculator extends ComponentWithOperations {
         this._initMemoryButtons();
         this._initEqualsButton();
 
-        this.onClick('[data-element="clear-button"]', this._writeValue(''))
+        this.onClick('[data-element="clear-button"]', () => this._writeValue(''))
     }
 
     _initEqualsButton() {
