@@ -6,15 +6,17 @@ export default class MemoryButtons extends BaseComponent {
         this._data = [];
         this._render();
 
-        this._element.addEventListener('click', (event) => {
-            if (event.target.closest('[data-label]')) {
-                if (event.target.dataset.label === 'M+') {
-                    this._write();
-                } else if (event.target.dataset.label === 'M-') {
-                    this._read();
-                }
+        this.onClick('[data-label]', (event) => {
+            if (event.target.dataset.label === 'M+') {
+                this.emit('save-to-memory', this._memorize.bind(this))
+            } else if (event.target.dataset.label === 'M-') {
+                this.emit('read-from-memory', this._data.pop())
             }
-        });
+        })
+    }
+
+    _memorize(value) {
+        this._data.push(value)
     }
 
     _render() {
@@ -23,19 +25,5 @@ export default class MemoryButtons extends BaseComponent {
                 <div class="calc__btn calc__memory-btn" data-label="M+"></div>
                 <div class="calc__btn calc__memory-btn" data-label="M-"></div>
             </div>`;
-    }
-
-    _read() {
-        if (this._data.length > 0) {
-            this._onWriteValue(this._onReadValue().concat(this._data.pop()));
-        }
-    }
-
-    _write() {
-        const value = this._onReadValue();
-        if (value) {
-            this._data.push(value);
-            this._onWriteValue('');
-        }
     }
 }

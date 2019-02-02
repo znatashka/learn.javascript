@@ -5,15 +5,9 @@ export default class NumericButtons extends BaseComponent {
         super(options);
         this._render();
 
-        this._element.addEventListener('click', (event) => {
-            if (event.target.closest('[data-label]')) {
-                this._onWriteValue(
-                    this._onReadValue().concat(
-                        event.target.dataset.label
-                    )
-                );
-            }
-        });
+        this.onClick('[data-label]', (event) => {
+            this.emit('write_number', event.target.dataset.label)
+        })
     }
 
     _render() {
